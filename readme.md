@@ -89,5 +89,5 @@ A directory path where the search halts if no matches are found before reaching 
 
 - [find-up](https://github.com/sindresorhus/find-up) - A more advanced version of this package
 - [find-up-cli](https://github.com/sindresorhus/find-up-cli) - CLI for this module
-- [pkg-up](https://github.com/sindresorhus/pkg-up) - Find the closest package.json file
+- [package-up](https://github.com/sindresorhus/package-up) - Find the closest package.json file
 - [pkg-dir](https://github.com/sindresorhus/pkg-dir) - Find the root directory of an npm package
