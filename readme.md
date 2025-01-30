@@ -26,7 +26,6 @@ npm install find-up-simple
 `example.js`
 
 ```js
-import path from 'node:path';
 import {findUp} from 'find-up-simple';
 
 console.log(await findUp('unicorn.png'));
