@@ -50,6 +50,7 @@ absolute.barDirQux = path.join(absolute.fixtureDirectory, name.fooDirectory, nam
 absolute.fileLink = path.join(absolute.fixtureDirectory, name.fileLink);
 absolute.directoryLink = path.join(absolute.fixtureDirectory, name.directoryLink);
 absolute.dotDirectory = path.join(__dirname, name.dotDirectory);
+absolute.rootTmpDirectory = '/tmp';
 
 const url = {
 	fixtureDirectory: pathToFileURL(absolute.fixtureDirectory),
@@ -419,7 +420,17 @@ test('async (dot file)', async t => {
 	t.is(foundPath, absolute.dotDirectory);
 });
 
-test('sync (dot file)', async t => {
-	const foundPath = await findUp(name.dotDirectory, {type: 'directory'});
+test('sync (dot file)', t => {
+	const foundPath = findUpSync(name.dotDirectory, {type: 'directory'});
 	t.is(foundPath, absolute.dotDirectory);
+});
+
+test('async (root/stopAt file)', async t => {
+	const foundPath = await findUp('tmp', {type: 'directory'});
+	t.is(foundPath, absolute.rootTmpDirectory);
+});
+
+test('sync (root/stopAt file)', t => {
+	const foundPath = findUpSync('tmp', {type: 'directory'});
+	t.is(foundPath, absolute.rootTmpDirectory);
 });

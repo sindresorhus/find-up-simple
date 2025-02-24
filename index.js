@@ -15,15 +15,19 @@ export async function findUp(name, {
 	const {root} = path.parse(directory);
 	stopAt = path.resolve(directory, toPath(stopAt ?? root));
 
-	while (directory && directory !== stopAt && directory !== root) {
+	while (directory) {
 		const filePath = path.isAbsolute(name) ? name : path.join(directory, name);
-
 		try {
 			const stats = await fsPromises.stat(filePath); // eslint-disable-line no-await-in-loop
 			if ((type === 'file' && stats.isFile()) || (type === 'directory' && stats.isDirectory())) {
 				return filePath;
 			}
 		} catch {}
+
+		// If we've reached the stopAt directory (or the root), stop after checking it.
+		if (directory === stopAt || directory === root) {
+			break;
+		}
 
 		directory = path.dirname(directory);
 	}
@@ -38,7 +42,7 @@ export function findUpSync(name, {
 	const {root} = path.parse(directory);
 	stopAt = path.resolve(directory, toPath(stopAt) ?? root);
 
-	while (directory && directory !== stopAt && directory !== root) {
+	while (directory) {
 		const filePath = path.isAbsolute(name) ? name : path.join(directory, name);
 
 		try {
@@ -47,6 +51,10 @@ export function findUpSync(name, {
 				return filePath;
 			}
 		} catch {}
+
+		if (directory === stopAt || directory === root) {
+			break;
+		}
 
 		directory = path.dirname(directory);
 	}
