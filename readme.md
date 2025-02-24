@@ -72,7 +72,7 @@ The type of path to match.
 Type: `URL | string`\
 Default: Root directory
 
-A directory path where the search halts if no matches are found before reaching this point.
+The last directory to search before stopping.
 
 ## FAQ
 

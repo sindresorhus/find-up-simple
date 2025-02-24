@@ -415,22 +415,22 @@ test('sync (not found, custom cwd)', t => {
 	t.is(foundPath, undefined);
 });
 
-test('async (dot file)', async t => {
+test('async (dot directory)', async t => {
 	const foundPath = await findUp(name.dotDirectory, {type: 'directory'});
 	t.is(foundPath, absolute.dotDirectory);
 });
 
-test('sync (dot file)', t => {
+test('sync (dot directory)', t => {
 	const foundPath = findUpSync(name.dotDirectory, {type: 'directory'});
 	t.is(foundPath, absolute.dotDirectory);
 });
 
-test('async (root/stopAt file)', async t => {
+test('async (root/stopAt directory)', async t => {
 	const foundPath = await findUp('tmp', {type: 'directory'});
 	t.is(foundPath, absolute.rootTmpDirectory);
 });
 
-test('sync (root/stopAt file)', t => {
+test('sync (root/stopAt directory)', t => {
 	const foundPath = findUpSync('tmp', {type: 'directory'});
 	t.is(foundPath, absolute.rootTmpDirectory);
 });
