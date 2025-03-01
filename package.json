@@ -1,6 +1,6 @@
 {
 	"name": "find-up-simple",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Find a file or directory by walking up parent directories — Zero dependencies",
 	"license": "MIT",
 	"repository": "sindresorhus/find-up-simple",
