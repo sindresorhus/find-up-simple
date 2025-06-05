@@ -89,4 +89,4 @@ The last directory to search before stopping.
 - [find-up](https://github.com/sindresorhus/find-up) - A more advanced version of this package
 - [find-up-cli](https://github.com/sindresorhus/find-up-cli) - CLI for this module
 - [package-up](https://github.com/sindresorhus/package-up) - Find the closest package.json file
-- [pkg-dir](https://github.com/sindresorhus/pkg-dir) - Find the root directory of an npm package
+- [package-directory](https://github.com/sindresorhus/package-directory) - Find the root directory of an npm package
