@@ -23,7 +23,7 @@ export type Options = {
 	/**
 	The maximum number of parent directories to traverse.
 
-	@default Infinity
+	@default Number.POSITIVE_INFINITY
 	*/
 	readonly levels?: number;
 };
