@@ -19,6 +19,13 @@ export type Options = {
 	Default: Root directory
 	*/
 	readonly stopAt?: URL | string;
+
+	/**
+	The maximum number of parent directories to traverse.
+
+	@default Infinity
+	*/
+	readonly levels?: number;
 };
 
 /**

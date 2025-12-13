@@ -434,3 +434,156 @@ test('sync (root/stopAt directory)', t => {
 	const foundPath = findUpSync('tmp', {type: 'directory'});
 	t.is(foundPath, absolute.rootTmpDirectory);
 });
+
+test('async (levels option - found within limit)', async t => {
+	const foundPath = await findUp(name.packageJson, {
+		cwd: relative.barDir,
+		levels: 3,
+	});
+
+	t.is(foundPath, absolute.packageJson);
+});
+
+test('sync (levels option - found within limit)', t => {
+	const foundPath = findUpSync(name.packageJson, {
+		cwd: relative.barDir,
+		levels: 3,
+	});
+
+	t.is(foundPath, absolute.packageJson);
+});
+
+test('async (levels option - exceeded limit)', async t => {
+	const foundPath = await findUp(name.packageJson, {
+		cwd: relative.barDir,
+		levels: 2,
+	});
+
+	t.is(foundPath, undefined);
+});
+
+test('sync (levels option - exceeded limit)', t => {
+	const foundPath = findUpSync(name.packageJson, {
+		cwd: relative.barDir,
+		levels: 2,
+	});
+
+	t.is(foundPath, undefined);
+});
+
+test('async (levels option - directory found within limit)', async t => {
+	const foundPath = await findUp(name.fooDirectory, {
+		cwd: relative.barDir,
+		type: 'directory',
+		levels: 2,
+	});
+
+	t.is(foundPath, absolute.fooDir);
+});
+
+test('sync (levels option - directory found within limit)', t => {
+	const foundPath = findUpSync(name.fooDirectory, {
+		cwd: relative.barDir,
+		type: 'directory',
+		levels: 2,
+	});
+
+	t.is(foundPath, absolute.fooDir);
+});
+
+test('async (levels option - directory exceeded limit)', async t => {
+	const foundPath = await findUp(name.fooDirectory, {
+		cwd: relative.barDir,
+		type: 'directory',
+		levels: 1,
+	});
+
+	t.is(foundPath, undefined);
+});
+
+test('sync (levels option - directory exceeded limit)', t => {
+	const foundPath = findUpSync(name.fooDirectory, {
+		cwd: relative.barDir,
+		type: 'directory',
+		levels: 1,
+	});
+
+	t.is(foundPath, undefined);
+});
+
+test('async (levels option - zero levels)', async t => {
+	const foundPath = await findUp(name.packageJson, {
+		cwd: relative.barDir,
+		levels: 0,
+	});
+
+	t.is(foundPath, undefined);
+});
+
+test('sync (levels option - zero levels)', t => {
+	const foundPath = findUpSync(name.packageJson, {
+		cwd: relative.barDir,
+		levels: 0,
+	});
+
+	t.is(foundPath, undefined);
+});
+
+test('async (levels option - zero levels, file in cwd)', async t => {
+	const foundPath = await findUp(name.qux, {
+		cwd: relative.barDir,
+		levels: 0,
+	});
+
+	t.is(foundPath, absolute.barDirQux);
+});
+
+test('sync (levels option - zero levels, file in cwd)', t => {
+	const foundPath = findUpSync(name.qux, {
+		cwd: relative.barDir,
+		levels: 0,
+	});
+
+	t.is(foundPath, absolute.barDirQux);
+});
+
+test('async (levels option - zero levels, directory in cwd)', async t => {
+	const foundPath = await findUp(name.barDirectory, {
+		cwd: absolute.fooDir,
+		type: 'directory',
+		levels: 0,
+	});
+
+	t.is(foundPath, absolute.barDir);
+});
+
+test('sync (levels option - zero levels, directory in cwd)', t => {
+	const foundPath = findUpSync(name.barDirectory, {
+		cwd: absolute.fooDir,
+		type: 'directory',
+		levels: 0,
+	});
+
+	t.is(foundPath, absolute.barDir);
+});
+
+test('async (levels option - with stopAt)', async t => {
+	const foundPath = await findUp(name.packageJson, {
+		cwd: relative.barDir,
+		levels: 10,
+		stopAt: absolute.fooDir,
+	});
+
+	t.is(foundPath, undefined);
+});
+
+test('sync (levels option - with stopAt)', t => {
+	const foundPath = findUpSync(name.packageJson, {
+		cwd: relative.barDir,
+		levels: 10,
+		stopAt: absolute.fooDir,
+	});
+
+	t.is(foundPath, undefined);
+});
+

@@ -10,7 +10,11 @@ export async function findUp(name, {
 	cwd = process.cwd(),
 	type = 'file',
 	stopAt,
+	levels = Number.POSITIVE_INFINITY,
 } = {}) {
+	let currentLevel = 0;
+	const maxLevel = Math.floor(levels);
+
 	let directory = path.resolve(toPath(cwd) ?? '');
 	const {root} = path.parse(directory);
 	stopAt = path.resolve(directory, toPath(stopAt ?? root));
@@ -29,6 +33,12 @@ export async function findUp(name, {
 			break;
 		}
 
+		if (currentLevel >= maxLevel) {
+			break;
+		}
+
+		currentLevel++;
+
 		directory = path.dirname(directory);
 	}
 }
@@ -37,7 +47,11 @@ export function findUpSync(name, {
 	cwd = process.cwd(),
 	type = 'file',
 	stopAt,
+	levels = Number.POSITIVE_INFINITY,
 } = {}) {
+	let currentLevel = 0;
+	const maxLevel = Math.floor(levels);
+
 	let directory = path.resolve(toPath(cwd) ?? '');
 	const {root} = path.parse(directory);
 	stopAt = path.resolve(directory, toPath(stopAt) ?? root);
@@ -56,6 +70,12 @@ export function findUpSync(name, {
 		if (directory === stopAt || directory === root) {
 			break;
 		}
+
+		if (currentLevel >= maxLevel) {
+			break;
+		}
+
+		currentLevel++;
 
 		directory = path.dirname(directory);
 	}
