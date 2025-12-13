@@ -74,6 +74,13 @@ Default: Root directory
 
 The last directory to search before stopping.
 
+##### levels
+
+Type: `number`\
+Default: `Number.POSITIVE_INFINITY`
+
+The maximum number of parent directories to traverse before stopping the search.
+
 ## FAQ
 
 ### How is it different from [`find-up`](https://github.com/sindresorhus/find-up)?
